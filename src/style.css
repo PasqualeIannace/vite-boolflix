@@ -9,9 +9,14 @@ body {
     background-color: #141414;
 }
 
-h1 {
+header {
+    display: flex;
+    justify-content: space-between;
     max-width: 1400px;
     margin: 1em auto;
+}
+
+h1 {
     color: #E50815;
 }
 

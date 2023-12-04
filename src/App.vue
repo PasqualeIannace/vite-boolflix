@@ -25,15 +25,29 @@ export default {
         getApi() {
             let indirizzo = this.catalogo;
 
-            axios.request(indirizzo).then(function (response) {
-                console.log(response.data);
-                catalogo.array = response.data.results;
-                console.log("Il mio array", catalogo.array);
-            })
-            .catch(function (error) {
-                console.error(error);
-                console.log("Nessun risultato");
-            });
+            console.log("Catalogo: ", this.catalogo.cerca);
+
+            // se il campo ricerca è vuoto
+            if (this.catalogo.cerca == "") {
+                axios.request(indirizzo).then(function (response) {
+                    console.log(response.data);
+                    catalogo.array = response.data.results;
+                    console.log("Axios IF");
+                });
+            // altrimenti
+            } else {
+                catalogo.params.query = catalogo.cerca;
+                
+                axios.request(indirizzo).then(function (response) {
+                    console.log(response.data);
+                    catalogo.array = response.data.results;
+                    console.log("Axios ELSE");
+                })
+                .catch(function (error) {
+                        console.error(error);
+                        console.log("Nessun risultato");
+                    });
+            }
         }
     }
 }
@@ -42,10 +56,10 @@ export default {
 <template>
     <header>
         <h1>Boolfix</h1>
+        <AppSearch @getSearch="getApi" />
     </header>
 
     <main class="container">
-        <AppSearch />
         <Section1 v-for="i in catalogo.array" :film="i" />
     </main>
 </template>
