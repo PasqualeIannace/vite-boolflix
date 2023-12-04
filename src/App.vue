@@ -24,20 +24,16 @@ export default {
     methods: {
         getApi() {
             let indirizzo = this.catalogo;
-            // console.log(indirizzo);
 
-            // axios.get(indirizzo).then(result => {
-            //     console.log(result.data);
-            // })
-            axios
-                .request(indirizzo)
-                .then(function (response) {
-                    console.log(response.data);
-                    console.log(indirizzo);
-                })
-                .catch(function (error) {
-                    console.error(error);
-                });
+            axios.request(indirizzo).then(function (response) {
+                console.log(response.data);
+                catalogo.array = response.data.results;
+                console.log("Il mio array", catalogo.array);
+            })
+            .catch(function (error) {
+                console.error(error);
+                console.log("Nessun risultato");
+            });
         }
     }
 }
@@ -50,7 +46,7 @@ export default {
 
     <main class="container">
         <AppSearch />
-        <Section1 />
+        <Section1 v-for="i in catalogo.array" :film="i" />
     </main>
 </template>
 
