@@ -7,9 +7,9 @@ import { catalogo } from "./components/catalogo.js"
 
 export default {
     components: {
-		Section1,
+        Section1,
         AppSearch
-	},
+    },
 
     data() {
         return {
@@ -23,8 +23,21 @@ export default {
 
     methods: {
         getApi() {
-            console.log("Funzione getApi");
-            // let indirizzo = this.catalogo.apriUrl;
+            let indirizzo = this.catalogo;
+            // console.log(indirizzo);
+
+            // axios.get(indirizzo).then(result => {
+            //     console.log(result.data);
+            // })
+            axios
+                .request(indirizzo)
+                .then(function (response) {
+                    console.log(response.data);
+                    console.log(indirizzo);
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
         }
     }
 }
@@ -41,6 +54,4 @@ export default {
     </main>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
