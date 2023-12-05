@@ -29,21 +29,21 @@ export default {
 
             // se il campo ricerca è vuoto
             if (this.catalogo.cerca == "") {
-                axios.request(indirizzo).then(function (response) {
+                axios.request(indirizzo).then(response => {
                     console.log(response.data);
-                    catalogo.array = response.data.results;
+                    this.catalogo.array = response.data.results;
                     console.log("Axios IF");
                 });
-            // altrimenti
+                // altrimenti
             } else {
                 catalogo.params.query = catalogo.cerca;
-                
-                axios.request(indirizzo).then(function (response) {
+
+                axios.request(indirizzo).then(response => {
                     console.log(response.data);
-                    catalogo.array = response.data.results;
+                    this.catalogo.array = response.data.results;
                     console.log("Axios ELSE");
                 })
-                .catch(function (error) {
+                    .catch(error => {
                         console.error(error);
                         console.log("Nessun risultato");
                     });
