@@ -1,8 +1,15 @@
 <script>
 export default {
-	props: {
+    props: {
         film: Object
-	},
+    },
+
+    methods: {
+        imgError(event) {
+            console.log("Immagine non caricata");
+            event.target.src = "/flags/unknown.png";
+        }
+    },
 
     mounted() {
         console.log("App Section1");
@@ -15,14 +22,18 @@ export default {
     <div class="card">
         <h2>{{ film.title }}</h2>
         <h3>{{ film.original_title }}</h3>
-        <p>Lingua: {{ film.original_language }}</p>
+        <img @error="imgError" :src="`/flags/${film.original_language}.png`" alt="">
         <p>Voto: {{ film.vote_average }}</p>
     </div>
 </template>
 
 <style scoped>
-    .card {
-        width: calc(100% / 4);
-        margin: 1em;
-    }
+.card {
+    width: calc(100% / 4);
+    margin: 1em;
+}
+
+img {
+    width: 25%;
+}
 </style>
