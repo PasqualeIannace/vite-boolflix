@@ -1,15 +1,18 @@
 <script>
-import { catalogo } from "./catalogo.js"
+import { search } from "./catalogo.js"
 
 export default {
     data() {
         return {
-            catalogo
+            search
         }
     },
 
     methods: {
-        getSearch() {
+        getMovie() {
+            this.$emit();
+        },
+        getTVshow() {
             this.$emit()
         }
     },
@@ -22,7 +25,7 @@ export default {
 
 <template>
     <div>
-        <input type="text" name="" id="" placeholder="Cerca..." v-model="catalogo.cerca" @keyup="$emit('getSearch')">
+        <input type="text" name="" id="" placeholder="Cerca..." v-model="search.cerca" @keyup="$emit('getMovie')">
     </div>
 </template>
 
