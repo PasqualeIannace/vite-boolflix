@@ -45,3 +45,32 @@ h1 {
     width: 100%;
     height: 100%;
 }
+
+.card {
+    width: calc(100% / 4);
+    margin: 1em;
+    position: relative;
+
+    &:hover .poster {
+        display: hidden;
+    }
+
+    &:hover .blockDiv {
+        display: inline-block;
+        transform: scale(2);
+        transition-duration: 2s;
+    }
+}
+
+.blockDiv {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: white;
+    border-radius: 1em;
+}
+
+.card:hover .blockDiv {
+    background-color: #181818;
+}
