@@ -17,7 +17,6 @@ export default {
     data() {
         return {
             catalogo,
-
             search,
 
             searchApi: {
@@ -65,7 +64,6 @@ export default {
         getApiTVshow() {
             // cambio url api
             this.searchApi.url = this.catalogo.tvShowApi;
-            console.log("Api tv", this.catalogo.tvShowApi);
 
             if (this.search.cerca == "") {
                 // richiamo lista TV show
