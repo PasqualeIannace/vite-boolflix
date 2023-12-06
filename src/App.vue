@@ -90,7 +90,6 @@ export default {
 <template>
     <header>
         <h1>Boolfix</h1>
-        <!-- <AppSearch @getMovie="getApi(catalogoFilm, catalogoTVshow)" /> -->
         <AppSearch @getMovie="getApiMovie(), getApiTVshow()" />
     </header>
 

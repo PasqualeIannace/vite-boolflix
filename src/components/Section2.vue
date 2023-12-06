@@ -29,10 +29,14 @@ export default {
     <div class="card">
         <img v-if="path !== null" class="poster" :src="posterPath">
         <img v-else class="poster" src="unknownPoster.png" alt="">
-        <h2>{{ serie.name }}</h2>
-        <h3>{{ serie.original_name }}</h3>
-        <img @error="imgError" class="flags" :src="`/flags/${serie.original_language}.png`" alt="">
-        <p>Voto: {{ serie.vote_average }}</p>
+
+        <div class="hidden">
+            <h2>{{ serie.name }}</h2>
+            <h3>{{ serie.original_name }}</h3>
+            <img @error="imgError" class="flags" :src="`/flags/${serie.original_language}.png`" alt="">
+            <p>Voto: {{ serie.vote_average }}</p>
+        </div>
+
     </div>
 </template>
 
