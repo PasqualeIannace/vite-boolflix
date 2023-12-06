@@ -4,8 +4,7 @@ import Section2 from './components/Section2.vue'
 import AppSearch from './components/AppSearch.vue'
 
 import axios from 'axios'
-import { catalogoFilm } from "./components/catalogo.js"
-import { catalogoTVshow } from "./components/catalogo.js"
+import { catalogo } from "./components/catalogo.js"
 import { search } from "./components/catalogo.js"
 
 export default {
@@ -17,36 +16,43 @@ export default {
 
     data() {
         return {
-            catalogoFilm,
-            catalogoTVshow,
-            search
+            catalogo,
+
+            search,
+
+            searchApi: {
+                method: 'GET',
+                url: 'https://api.themoviedb.org/3/search/movie',
+                params: { query: 'aran', include_adult: 'false', language: 'it-IT', page: '1', api_key: "13c87d02aed24e6fc8f67bc5f9129f5c" },
+                headers: {
+                    accept: 'application/json',
+                    // Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxM2M4N2QwMmFlZDI0ZTZmYzhmNjdiYzVmOTEyOWY1YyIsInN1YiI6IjY1NmRjMDg4M2RjMzEzMDExYjNkYjJiOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.qIdkFgRcBZQZ5FbZu358zTsKL2qJLyyvy3sngAi5umk'
+                },
+            }
         }
     },
 
     mounted() {
-        this.getApi(this.catalogoFilm, this.catalogoTVshow);
+        this.getApiMovie();
+        this.getApiTVshow();
     },
 
     methods: {
-        getApi(film, tvShow) {
+        getApiMovie() {
+            // cambio url api
+            this.searchApi.url = this.catalogo.movieApi;
 
-            // RICHIAMO API FILM
-
-            // se il campo ricerca è vuoto
             if (this.search.cerca == "") {
-                axios.request(film).then(response => {
-                    // console.log(response.data);
-                    this.catalogoFilm.array = response.data.results;
+                // richiamo lista film
+                axios.request(this.searchApi).then(response => {
+                    this.catalogo.movieArray = response.data.results;
+                    console.log(response.data.results);
                 });
-                // altrimenti
             } else {
-                this.catalogoFilm.params.query = this.search.cerca;
-                // console.log(film);
+                this.searchApi.params.query = this.search.cerca;
 
-                axios.request(film).then(response => {
-                    // console.log(response.data);
-                    this.catalogoFilm.array = response.data.results;
-                    console.log("Axios ELSE");
+                axios.request(this.searchApi).then(response => {
+                    this.catalogo.movieArray = response.data.results;
                 })
                     .catch(error => {
                         console.error(error);
@@ -54,50 +60,47 @@ export default {
                     });
             }
 
+        },
 
-            // RICHIAMO LE SERIE TV
+        getApiTVshow() {
+            // cambio url api
+            this.searchApi.url = this.catalogo.tvShowApi;
+            console.log("Api tv", this.catalogo.tvShowApi);
 
-            // se il campo ricerca è vuoto
             if (this.search.cerca == "") {
-                console.log("SEI NELLE SERIE");
-
-                axios.request(tvShow).then(response => {
-                    console.log(response.data);
-                    this.catalogoTVshow.array = response.data.results;
-                    console.log("Axios IF");
+                // richiamo lista TV show
+                axios.request(this.searchApi).then(response => {
+                    this.catalogo.tvShowArray = response.data.results;
+                    console.log("STAMPO ARRAY TV", this.catalogo.tvShowArray);
                 });
-                // altrimenti
             } else {
-                this.catalogoTVshow.params.query = this.search.cerca;
-                console.log(tvShow);
+                this.searchApi.params.query = this.search.cerca;
 
-                axios.request(tvShow).then(response => {
-                    console.log(response.data);
-                    this.catalogoTVshow.array = response.data.results;
-                    console.log("Axios ELSE");
+                axios.request(this.searchApi).then(response => {
+                    this.catalogo.tvShowArray = response.data.results;
                 })
                     .catch(error => {
                         console.error(error);
                         console.log("Nessun risultato");
                     });
             }
-        }
+        },
     }
 }
-
 </script>
 
 <template>
     <header>
         <h1>Boolfix</h1>
-        <AppSearch @getMovie="getApi(catalogoFilm, catalogoTVshow)" />
+        <!-- <AppSearch @getMovie="getApi(catalogoFilm, catalogoTVshow)" /> -->
+        <AppSearch @getMovie="getApiMovie(), getApiTVshow()" />
     </header>
 
     <main class="container">
         <h2 class="genre">Film</h2>
-        <Section1 v-for="i in catalogoFilm.array" :film="i" />
+        <Section1 v-for="i in catalogo.movieArray" :film="i" />
         <h2 class="genre">Serie TV</h2>
-        <Section2 v-for="i in catalogoTVshow.array" :serie="i" />
+        <Section2 v-for="i in catalogo.tvShowArray" :serie="i" />
     </main>
 </template>
 

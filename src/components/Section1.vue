@@ -12,7 +12,7 @@ export default {
     },
 
     mounted() {
-        console.log("App Section1");
+
     }
 }
 
@@ -20,6 +20,7 @@ export default {
 
 <template>
     <div class="card">
+        <!-- <img :src="" alt="" :id="film"> -->
         <h2>{{ film.title }}</h2>
         <h3>{{ film.original_title }}</h3>
         <img @error="imgError" :src="`/flags/${film.original_language}.png`" alt="">
