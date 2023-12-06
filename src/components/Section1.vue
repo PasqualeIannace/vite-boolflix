@@ -34,6 +34,7 @@ export default {
             <h3>{{ film.original_title }}</h3>
             <img @error="imgError" class="flags" :src="`/flags/${film.original_language}.png`" alt="">
             <p>Voto: {{ film.vote_average }}</p>
+            <span>{{ film.overview }}</span>
         </div>
 
     </div>

@@ -35,6 +35,7 @@ export default {
             <h3>{{ serie.original_name }}</h3>
             <img @error="imgError" class="flags" :src="`/flags/${serie.original_language}.png`" alt="">
             <p>Voto: {{ serie.vote_average }}</p>
+            <span>{{ serie.overview }}</span>
         </div>
 
     </div>
