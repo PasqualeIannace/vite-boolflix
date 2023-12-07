@@ -13,13 +13,6 @@ export default {
             event.target.src = "/unknownPoster.png";
         },
 
-        debugVoto(voto) {
-            voto = voto.toFixed() / 2;
-
-            return voto;
-        },
-
-
         intVoto(voto) {
             if (voto == 0) {
                 return 0;
@@ -47,8 +40,6 @@ export default {
         },
 
         zeroStar(voto) {
-            //console.log("Sei in zeroStar e voto vale:", voto);
-
             if (voto == 0) {
                 return 5;
             };
@@ -57,10 +48,8 @@ export default {
 
             if (Number.isInteger(voto) == false) {
                 let NewVoto = parseInt(voto);
-                console.log("Voto in zero star vale: ", voto);
                 voto = NewVoto - 4;
                 voto = Math.abs(voto);
-                console.log("Voto in zero star dopo sottrazione: ", voto);
                 return voto;
             };
 
@@ -69,10 +58,6 @@ export default {
             return voto;
         }
     },
-
-    mounted() {
-
-    }
 }
 
 </script>
@@ -88,19 +73,15 @@ export default {
             <h2>{{ film.title }}</h2>
             <h3>{{ film.original_title }}</h3>
             <img @error="imgError" class="flags" :src="`/flags/${film.original_language}.png`" alt="">
-            <p class="py1">Voto numerico: {{ debugVoto(film.vote_average) }}
-            </p>
-            <img class="stars" v-for="i in intVoto(film.vote_average)" src="/stars/star.png" alt="">
-            <img class="stars" v-for="i in halfStar(film.vote_average)" src="/stars/halfStar.png" alt="">
-            <img class="stars" v-for="i in zeroStar(film.vote_average)" src="/stars/emptyStar.png" alt="">
+            <div>
+                <img class="stars" v-for="i in intVoto(film.vote_average)" src="/stars/star.png" alt="">
+                <img class="stars" v-for="i in halfStar(film.vote_average)" src="/stars/halfStar.png" alt="">
+                <img class="stars" v-for="i in zeroStar(film.vote_average)" src="/stars/emptyStar.png" alt="">
+            </div>
             <span>{{ film.overview }}</span>
         </div>
 
     </div>
 </template>
 
-<style scoped>
-.stars {
-    width: 2.5em;
-}
-</style>
+<style scoped></style>
