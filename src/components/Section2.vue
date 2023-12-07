@@ -30,11 +30,11 @@ export default {
         <img v-if="path !== null" class="poster" :src="posterPath">
         <img v-else class="poster" src="unknownPoster.png" alt="">
 
-        <div class="size100 blockDiv">
+        <div class="size100 info">
             <h2>{{ serie.name }}</h2>
             <h3>{{ serie.original_name }}</h3>
             <img @error="imgError" class="flags" :src="`/flags/${serie.original_language}.png`" alt="">
-            <p>Voto: {{ serie.vote_average }}</p>
+            <p class="py1">Voto: {{ serie.vote_average }}</p>
             <span>{{ serie.overview }}</span>
         </div>
 

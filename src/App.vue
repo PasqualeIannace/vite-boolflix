@@ -89,7 +89,7 @@ export default {
 
 <template>
     <header>
-        <h1>Boolfix</h1>
+        <h1>Boolflix</h1>
         <AppSearch @getMovie="getApiMovie(), getApiTVshow()" />
     </header>
 
@@ -103,9 +103,4 @@ export default {
 
 <style lang="scss">
 @use './styles/general.scss';
-
-.genre {
-    font-size: 2.5em;
-    width: 100%;
-}
 </style>

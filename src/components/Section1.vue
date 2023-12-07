@@ -29,11 +29,11 @@ export default {
             <img @error="posterError" class="poster" :src="`https://image.tmdb.org/t/p/w342/${film.poster_path}`">
         </div>
 
-        <div class="size100 blockDiv">
+        <div class="size100 info">
             <h2>{{ film.title }}</h2>
             <h3>{{ film.original_title }}</h3>
             <img @error="imgError" class="flags" :src="`/flags/${film.original_language}.png`" alt="">
-            <p>Voto: {{ film.vote_average }}</p>
+            <p class="py1">Voto: {{ film.vote_average }}</p>
             <span>{{ film.overview }}</span>
         </div>
 
