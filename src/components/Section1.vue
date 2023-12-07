@@ -63,6 +63,10 @@ export default {
                 console.log("Voto in zero star dopo sottrazione: ", voto);
                 return voto;
             };
+
+            voto -= 5;
+            voto = Math.abs(voto);
+            return voto;
         }
     },
 
