@@ -39,6 +39,7 @@ h1 {
     font-size: 3em;
     width: 100%;
     color: white;
+    padding: 0.5em;
 }
 
 .poster {
@@ -68,22 +69,32 @@ h1 {
     &:hover .info {
         display: inline-block;
         transform: scale(2);
-        transition-duration: 2s;
+        transition-duration: 1s;
         top: 8vh;
+        left: 0%;
+        z-index: 1;
+        width: 90%;
+        height: auto;
+        font-size: 0.6em;
     }
 }
 
 .info {
-    display: none;
+    display: hidden;
     position: absolute;
     top: 0;
     left: 0;
     color: white;
     border-radius: 1em;
-    z-index: 1;
     padding: 1em;
-    font-size: 0.6em;
+    font-size: 0.1em;
     box-shadow: 0 0 10px 0px gray;
+    width: 20%;
+    height: 10%;
+    overflow: hidden;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
 }
 
 .card:hover .info {
