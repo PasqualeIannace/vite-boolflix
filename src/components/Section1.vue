@@ -13,6 +13,10 @@ export default {
         posterError(event) {
             event.target.src = "/unknownPoster.png";
         },
+
+        fixVoto(voto) {
+            return voto.toFixed() / 2
+        },
     },
 
     mounted() {
@@ -33,7 +37,7 @@ export default {
             <h2>{{ film.title }}</h2>
             <h3>{{ film.original_title }}</h3>
             <img @error="imgError" class="flags" :src="`/flags/${film.original_language}.png`" alt="">
-            <p class="py1">Voto: {{ film.vote_average }}</p>
+            <p class="py1">Voto: {{ fixVoto(film.vote_average) }}</p>
             <span>{{ film.overview }}</span>
         </div>
 

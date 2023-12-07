@@ -15,7 +15,11 @@ export default {
         imgError(event) {
             console.log("Immagine non caricata");
             event.target.src = "/flags/unknown.png";
-        }
+        },
+
+        fixVoto(voto) {
+            return voto.toFixed() / 2
+        },
     },
 
     mounted() {
@@ -35,7 +39,7 @@ export default {
             <h2>{{ serie.name }}</h2>
             <h3>{{ serie.original_name }}</h3>
             <img @error="imgError" class="flags" :src="`/flags/${serie.original_language}.png`" alt="">
-            <p class="py1">Voto: {{ serie.vote_average }}</p>
+            <p class="py1">Voto: {{ fixVoto(serie.vote_average) }}</p>
             <span>{{ serie.overview }}</span>
         </div>
 
