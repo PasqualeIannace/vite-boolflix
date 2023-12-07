@@ -6,7 +6,6 @@ export default {
 
     methods: {
         imgError(event) {
-            console.log("Immagine non caricata");
             event.target.src = "/flags/unknown.png";
         },
 
@@ -15,7 +14,22 @@ export default {
         },
 
         fixVoto(voto) {
-            return voto.toFixed() / 2
+
+            if (voto == null) {
+                console.log("Voto vale NULL", voto);
+                return 0;
+            };
+
+            voto = voto.toFixed() / 2;
+
+            if (Number.isInteger(voto) == false) {
+                console.log("Voto è mezzo numero e vale: ", voto);
+                voto = parseInt(voto);
+                console.log("Voto è stato convertito in intero", voto);
+                return voto;
+            };
+
+            return voto
         },
     },
 
@@ -37,11 +51,17 @@ export default {
             <h2>{{ film.title }}</h2>
             <h3>{{ film.original_title }}</h3>
             <img @error="imgError" class="flags" :src="`/flags/${film.original_language}.png`" alt="">
-            <p class="py1">Voto: {{ fixVoto(film.vote_average) }}</p>
+            <p class="py1">Voto:
+            </p>
+            <img class="stars" v-for="i in fixVoto(film.vote_average)" src="/stars/star.png" alt="">
             <span>{{ film.overview }}</span>
         </div>
 
     </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.stars {
+    width: 2.5em;
+}
+</style>

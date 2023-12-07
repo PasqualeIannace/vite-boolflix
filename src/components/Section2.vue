@@ -13,7 +13,6 @@ export default {
 
     methods: {
         imgError(event) {
-            console.log("Immagine non caricata");
             event.target.src = "/flags/unknown.png";
         },
 
