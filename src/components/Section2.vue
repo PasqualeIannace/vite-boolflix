@@ -4,12 +4,12 @@ export default {
         serie: Object
     },
 
-    data() {
-        return {
-            posterPath: `https://image.tmdb.org/t/p/w342/${this.serie.poster_path}`,
-            path: this.serie.poster_path,
-        }
-    },
+    // data() {
+    //     return {
+    //         path: this.serie.poster_path,
+    //         posterPath: `https://image.tmdb.org/t/p/w342/${this.serie.poster_path}`,
+    //     }
+    // },
 
     methods: {
         imgError(event) {
@@ -19,7 +19,7 @@ export default {
     },
 
     mounted() {
-        console.log("App Section1");
+
     }
 }
 
@@ -27,7 +27,8 @@ export default {
 
 <template>
     <div class="card">
-        <img v-if="path !== null" class="poster" :src="posterPath">
+        <img v-if="this.serie.poster_path !== null" class="poster"
+            :src="`https://image.tmdb.org/t/p/w342/${this.serie.poster_path}`">
         <img v-else class="poster" src="unknownPoster.png" alt="">
 
         <div class="size100 info">
